@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <com.lee.stroketextview.StrokeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:strokeColor="#ff0000"
+        app:strokeWidth="5dp"
+        android:textSize="30sp"
+        android:textColor="#000"
+        android:text="Hello World!" />
+    <com.lee.stroketextview.StrokeTextView
+        android:id="@+id/gradient_hor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="30sp"
+        app:strokeColor="#cdcdcd"
+        app:strokeWidth="2dp"
+        app:gradientOrientation="horizontal"
+        android:text="Horizental Gradient!"/>
+    <com.lee.stroketextview.StrokeTextView
+        android:id="@+id/gradient_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="30sp"
+        app:strokeColor="#cdcdcd"
+        app:strokeWidth="2dp"
+        app:gradientOrientation="vertical"
+        android:text="Vertical Gradient!"/>
+</LinearLayout>
