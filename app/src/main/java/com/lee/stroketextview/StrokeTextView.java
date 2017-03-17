@@ -18,7 +18,7 @@ import java.util.Arrays;
  */
 
 public class StrokeTextView extends TextView {
-    private static final int HORIZENTAO = 0;
+    private static final int HORIZENTAL = 0;
     private static final int VERTICAL = 1;
 
     private int[] mGradientColor;
@@ -39,6 +39,7 @@ public class StrokeTextView extends TextView {
     public StrokeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
+
     }
 
     public StrokeTextView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -52,7 +53,7 @@ public class StrokeTextView extends TextView {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.StrokeTextView);
             mStrokeColor = a.getColor(R.styleable.StrokeTextView_strokeColor, Color.BLACK);
             mStrokeWidth = a.getDimensionPixelSize(R.styleable.StrokeTextView_strokeWidth, 0);
-            mGradientOrientation = a.getInt(R.styleable.StrokeTextView_gradientOrientation, HORIZENTAO);
+            mGradientOrientation = a.getInt(R.styleable.StrokeTextView_gradientOrientation, HORIZENTAL);
 
             setStrokeColor(mStrokeColor);
             setStrokeWidth(mStrokeWidth);
@@ -130,7 +131,7 @@ public class StrokeTextView extends TextView {
 
     private LinearGradient getGradient() {
         LinearGradient gradient;
-        if (mGradientOrientation == HORIZENTAO) {
+        if (mGradientOrientation == HORIZENTAL) {
             gradient = new LinearGradient(0, 0, getWidth(), 0, mGradientColor, null, Shader.TileMode.CLAMP);
         } else {
             gradient = new LinearGradient(0, 0, 0, getHeight(), mGradientColor, null, Shader.TileMode.CLAMP);
