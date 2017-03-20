@@ -11,6 +11,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 
 /**
@@ -87,8 +88,6 @@ public class StrokeTextView extends TextView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint.FontMetrics fm = mPaint.getFontMetrics();
-        CharSequence text = getText();
         if (mStrokeWidth > 0) {
             /**
              * 绘制描边
@@ -96,11 +95,11 @@ public class StrokeTextView extends TextView {
             mTextColor = getCurrentTextColor(); //保存文本的颜色
             mPaint.setStrokeWidth(mStrokeWidth); //设置描边宽度
             mPaint.setFakeBoldText(true); //设置粗体
+            mPaint.setShadowLayer(mStrokeWidth, 0, 0, 0);
             mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
             setColor(mStrokeColor); // 设置描边颜色
             mPaint.setShader(null);  //清空shader
-            canvas.drawText(text, 0, text.length(), 0, getHeight() - fm.descent, mPaint);
-
+            super.onDraw(canvas);
             /**
              * 绘制文本
              */
@@ -118,7 +117,9 @@ public class StrokeTextView extends TextView {
             }
 
             mPaint.setStrokeWidth(0);
-            canvas.drawText(text, 0, text.length(), 0, getHeight() - fm.descent, mPaint);
+//            mPaint.setFakeBoldText(false);
+            mPaint.setShadowLayer(0, 0, 0, 0);
+            super.onDraw(canvas);
         } else {
             super.onDraw(canvas);
         }
@@ -140,6 +141,15 @@ public class StrokeTextView extends TextView {
     }
 
     private void setColor(int color) {
+        Field textColorField;
+        try {
+            textColorField = TextView.class.getDeclaredField("mCurTextColor");
+            textColorField.setAccessible(true);
+            textColorField.set(this, color);
+            textColorField.setAccessible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mPaint.setColor(color);
     }
 }
